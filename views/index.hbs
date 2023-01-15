@@ -12,7 +12,11 @@
     <section class="main">
     {{> nav}}
         <div class="main-text">
+            {{#if loggedIn}}
+            <h1>I {{user.name}} joined hands in making our city beautiful. I am Proud of it</h1>
+            {{else}}
             <h1>Let's join our hands in making the city beautiful.</h1>
+            {{/if}}
             <p>Villages are the building blocks of our country. If we transform the villages, we will transform our country.</p>
         </div>
     </section>
