@@ -5,6 +5,18 @@ const Department = require("../models/Department");
 const User = require("../models/User");
 const Scheme = require("../models/GovtScheme");
 
+router.get("/problem", verifyToken, async (req, res) => {
+  let problems = req.user.problems;
+  problems = await Problem.find({ _id: { $in: problems } }).populate("department");
+  res.render("problem.hbs",{
+    loggedIn: true,
+    admin: req.user.role === "admin",
+    public: req.user.role === "public",
+    employee: req.user.role === "employee",
+    problems,
+  });
+});
+
 router.post("/addproblem", verifyToken, (req, res) => {
   console.log(req.body);
   const { description, department, street, taluk, city, pincode, fromDate } =
@@ -64,7 +76,12 @@ router.get("/addproblem", verifyToken, async (req, res) => {
 });
 
 router.get("/schemes", verifyToken, async (req, res) => {
-  const userType = req.user.role;
+  let userType;
+  if(req.user)
+    userType = req.user.role;
+  else
+    userType = undefined;
+  console.log(userType);
   const schemes = await Scheme.find()
     .populate("department")
     .then((schemes) => {
@@ -77,13 +94,22 @@ router.get("/schemes", verifyToken, async (req, res) => {
       console.log(err);
     });
   res.render("scheme.hbs", {
-    loggedIn: userType,
+    loggedIn: userType !== undefined,
     admin: userType === "admin",
+    public: userType === "public",
+    employee: userType === "employee",
     schemes,
   });
 });
 
-router.get("/about", (req, res) => {
-  res.render("about.hbs");
+router.get("/about", verifyToken, (req, res) => {
+  let userType;
+  if(req.user) userType = req.user.role;
+  res.render("about.hbs",{
+    loggedIn: userType !== undefined,
+    admin: userType === "admin",
+    public: userType === "public",
+    employee: userType === "employee",
+  });
 });
 module.exports = router;
