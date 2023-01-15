@@ -2,6 +2,8 @@ const router = require("express").Router();
 const Department = require("../models/Department");
 const verifyToken = require("../utils/verifyToken");
 const Scheme = require("../models/GovtScheme");
+const bcrypt = require("bcrypt");
+const User = require("../models/User");
 
 router.get("/department", verifyToken, async (req, res) => {
   const userType = req.user.role;
@@ -159,4 +161,67 @@ router.post("/addscheme", verifyToken, (req, res) => {
     res.send("Scheme added successfully");
   });
 });
+
+router.get("/employee", verifyToken, (req, res) => {
+  const userType = req.user.role;
+  if (userType !== "admin")
+    return res.send("You are not authorized to view this page");
+  res.render("employee.hbs", {
+    loggedIn: true,
+    admin: true,
+  });
+});
+
+router.get("/addemployee", verifyToken, async (req, res) => {
+  const userType = req.user.role;
+  if (userType !== "admin")
+    return res.send("You are not authorized to view this page");
+  const departments = await Department.find()
+    .then((departments) => {
+      return departments;
+    })
+    .catch((err) => { 
+      console.log(err);
+    });
+  res.render("addemployee.hbs", {
+    loggedIn: true,
+    admin: true,
+    departments,
+  });
+});
+
+router.post("/addemployee", verifyToken, (req, res) => {
+  const { name, email,phone, password, department } = req.body;
+  if (!name || !email || !phone || !password || !department)
+    return res.send("Please fill all the fields");
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(password, salt);
+  const employee = new User({
+    name,
+    email,
+    phone,
+    password: hash,
+    role: "employee",
+    department,
+  });
+  employee.save((err, employee) => {
+    if (err) {
+      console.log(err);
+      return res.send("Something went wrong");
+    }
+    Department.findByIdAndUpdate(
+      department,
+      { $push: { employees: employee._id } },
+      (err, department) => {
+        if (err) {
+          console.log(err);
+          return res.send("Something went wrong");
+        }
+        console.log(department);
+      }
+    );
+    res.send("Employee added successfully");
+  });
+});
+
 module.exports = router;
