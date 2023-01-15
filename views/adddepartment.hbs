@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/register.css">
+  <title>Add Department</title>
+</head>
+
+<body>
+  {{> nav}}
+  <div style="margin: 2rem auto;" class="form-container">
+    <h1 style="text-align: center;">Add Department</h1>
+    <form action="/admin/adddepartment" method="post">
+      <input type="text" name="deptCode" placeholder="Enter Department Code" required />
+      <input type="text" name="name" placeholder="Enter Department Name" required />
+      <input type="text" name="street" placeholder="Enter Street" required />
+      <input type="text" name="taluk" placeholder="Enter Taluk" required />
+      <input type="text" name="city" placeholder="Enter District" required />
+      <input type="text" name="pincode" placeholder="Enter Pincode" required />
+      <input type="text" name="phoneNumber" placeholder="Enter Phone Number" required />
+      <input style="width: 30%;" type="submit" name="submit" value="Submit" id="submit-btn" />
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>
