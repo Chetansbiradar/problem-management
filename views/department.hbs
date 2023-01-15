@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/schemes.css">
   <link rel="stylesheet" href="/css/addscheme.css">
-  <title>Schemes</title>
+  <title>Department</title>
 </head>
 <body>
   <div class="schemes">
@@ -26,14 +26,19 @@
         <th>Delete</th>
         {{/if}}
       </tr>
-      {{#each schemes}}
+      {{#each departments}}
       <tr>
         <td>{{this.deptCode}}</td>
         <td>{{this.name}}</td>
-        <td>{{this.street}}, {{this.taluk}}, {{this.city}}, {{this.pincode}}</td>
-        <td><a href="{{this.url}}">Click here</a></td>
+        <td style="text-align: left;">
+          <p>Street: {{this.address.street}}</p>
+          <p>Taluk: {{this.address.taluk}} </p>
+          <p>City: {{this.address.city}}</p>
+          <p>Pincode: {{this.address.pincode}}</p>
+        </td>
+        <td><a href="tel:{{this.phoneNumber}}">{{this.phoneNumber}}</a></td>
         {{#if this.isAdmin}}
-        <td><a href="/admin/deletedepartment/{{this._id}}" class="delete-link"><button class="delete-scheme">Delete</button></a></td>
+        <td><a href="/admin/deletedepartment/{{this._id}}" class="delete-link"><button class="delete-scheme"> 🗑️ Delete </button></a></td>
         {{/if}}
       </tr>
       {{/each}}
