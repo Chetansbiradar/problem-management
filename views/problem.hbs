@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/schemes.css">
+  <link rel="stylesheet" href="/css/addscheme.css">
+  <title>Schemes</title>
+</head>
+<body>
+  <div class="schemes">
+  {{> nav}}
+ {{!-- table --}}
+    {{#if loggedIn}}
+    <a href="/public/addproblem" class="add-scheme-link"><button class="add-scheme">Add Problem</button></a>
+    {{#if problems}}
+    <table>
+      <tr>
+        <th>Problem Department</th>
+        <th>Description</th>
+        <th>Date of issue</th>
+        <th>Resolved</th>
+        <th>Delete</th>
+      </tr>
+      {{#each problems}}
+      <tr>
+        <td>{{this.department.name}}</td>
+        <td>{{this.description}}</td>
+        <td>{{this.fromDate}}</td>
+        <td>{{this.resolved}}</td>
+        <td><a href="/public/deleteproblem/{{this._id}}" class="delete-link"><button class="delete-scheme"> 🗑️ Delete</button></a></td>
+      </tr>
+      {{/each}}
+    </table>
+    {{else}}
+    <h1>No problems found</h1>
+    {{/if}}
+    {{/if}}
+  </div>
+</body>
+</html>
+
