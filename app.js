@@ -54,10 +54,10 @@ app.use("/img/", express.static(path.join(__dirname, "public","img")));
 app.use("/css/", express.static(path.join(__dirname, "public","css")));
 app.set("view engine", "hbs");
 app.get("/",verifyToken,(req, res) => {
-  console.log("test");
-  const userType = req.user.role;
+  let userType;
+  if (req.user) userType = req.user.role;
   res.render("index.hbs",{
-    loggedIn: userType,
+    loggedIn: userType !== undefined,
     public: userType === "public",
     employee: userType === "employee",
     admin: userType === "admin"
