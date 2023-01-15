@@ -162,25 +162,34 @@ router.post("/addscheme", verifyToken, (req, res) => {
   });
 });
 
-router.get("/employee", verifyToken, (req, res) => {
+router.get("/employee", verifyToken, async (req, res) => {
   const userType = req.user.role;
   if (userType !== "admin")
     return res.send("You are not authorized to view this page");
+  const employees = await User.find({ role: "employee" })
+    .populate("department")
+    .catch((err) => {
+      console.log(err);
+    });
+  console.log(employees);
   res.render("employee.hbs", {
     loggedIn: true,
     admin: true,
+    employees,
   });
 });
 
 router.get("/addemployee", verifyToken, async (req, res) => {
   const userType = req.user.role;
+
   if (userType !== "admin")
     return res.send("You are not authorized to view this page");
+
   const departments = await Department.find()
     .then((departments) => {
       return departments;
     })
-    .catch((err) => { 
+    .catch((err) => {
       console.log(err);
     });
   res.render("addemployee.hbs", {
@@ -191,7 +200,7 @@ router.get("/addemployee", verifyToken, async (req, res) => {
 });
 
 router.post("/addemployee", verifyToken, (req, res) => {
-  const { name, email,phone, password, department } = req.body;
+  const { name, email, phone, password, department } = req.body;
   if (!name || !email || !phone || !password || !department)
     return res.send("Please fill all the fields");
   const salt = bcrypt.genSaltSync(10);
@@ -222,6 +231,34 @@ router.post("/addemployee", verifyToken, (req, res) => {
     );
     res.send("Employee added successfully");
   });
+});
+
+router.get("/deleteemployee/:id", verifyToken, (req, res) => {
+  try {
+    if (req.user.role !== "admin")
+      return res.send("You are not authorized to view this page");
+
+    const id = req.params.id;
+    
+    User.findByIdAndDelete(id)
+      .then((employee) => {
+        Department.findByIdAndUpdate(employee.department, {
+          $pull: { employees: employee._id },
+        })
+          .then((department) => {
+            console.log(department);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    res.redirect("/admin/employee");
+  } catch (error) {
+    res.send("Something went wrong" + error);
+  }
 });
 
 module.exports = router;
