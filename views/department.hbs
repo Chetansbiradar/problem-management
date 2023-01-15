@@ -6,25 +6,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/schemes.css">
+  <link rel="stylesheet" href="/css/addscheme.css">
   <title>Schemes</title>
 </head>
 <body>
   <div class="schemes">
   {{> nav}}
  {{!-- table --}}
+    {{#if admin}}
+    <a href="/admin/adddepartment" class="add-scheme-link"><button class="add-scheme">Add Department</button></a>
+    {{/if}}
     <table>
       <tr>
-        <th>Scheme Name</th>
-        <th>Description</th>
-        <th>Department</th>
-        <th>Url</th>
+        <th>Department code</th>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Contact</th>
+        {{#if admin}}
+        <th>Delete</th>
+        {{/if}}
       </tr>
       {{#each schemes}}
       <tr>
+        <td>{{this.deptCode}}</td>
         <td>{{this.name}}</td>
-        <td>{{this.description}}</td>
-        <td>{{this.department.name}}</td>
+        <td>{{this.street}}, {{this.taluk}}, {{this.city}}, {{this.pincode}}</td>
         <td><a href="{{this.url}}">Click here</a></td>
+        {{#if this.isAdmin}}
+        <td><a href="/admin/deletedepartment/{{this._id}}" class="delete-link"><button class="delete-scheme">Delete</button></a></td>
+        {{/if}}
       </tr>
       {{/each}}
     </table>

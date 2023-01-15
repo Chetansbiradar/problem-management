@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/schemes.css">
+  <link rel="stylesheet" href="/css/addscheme.css">
   <title>Schemes</title>
 </head>
 <body>
@@ -13,7 +14,7 @@
   {{> nav}}
  {{!-- table --}}
     {{#if admin}}
-    <a href="/admin/addscheme"><button>Add Scheme</button></a>
+    <a href="/admin/addscheme" class="add-scheme-link"><button class="add-scheme">Add Scheme</button></a>
     {{/if}}
     <table>
       <tr>
@@ -30,9 +31,9 @@
         <td>{{this.name}}</td>
         <td>{{this.description}}</td>
         <td>{{this.department.name}}</td>
-        <td><a href="{{this.url}}">Click hereee</a></td>
+        <td><a href="{{this.url}}">Click here</a></td>
         {{#if this.isAdmin}}
-        <td><a href="/admin/deletescheme/{{this._id}}"><button>Delete</button></a></td>
+        <td><a href="/admin/deletescheme/{{this._id}}" class="delete-link"><button class="delete-scheme">Delete</button></a></td>
         {{/if}}
       </tr>
       {{/each}}

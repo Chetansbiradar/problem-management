@@ -7,26 +7,30 @@
   <title>Document</title>
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/register.css">
+  <link rel="stylesheet" href="/css/adddepartment.css">
+  <link rel="stylesheet" href="/css/addproblem.css">
 </head>
 <body>
     {{> nav}}
-  {{! Add schemes page }}
-  <div style="margin: 2rem auto;" class="form-container">
-  <h1 style="text-align: center;">Add scheme</h1>
-    <form action="/admin/addscheme" method="post">
-      <input type="text" name="name" placeholder="Enter scheme name" required />
-      <input type="text" name="description" placeholder="Enter scheme description" required />
-      <input type="text" name="url" placeholder="Enter the url of scheme to be added" required/>
-      <div class="choose-dept">
-        <label for="department">Choose department:</label>
-        <select name="department">
-          {{#each departments}}
-          <option value="{{this._id}}">{{this.name}}</option>
-          {{/each}}
-        </select>
-      </div>
-      <input style="width: 30%;" type="submit" name="submit" value="Submit" id="submit-btn" />
-    </form>
-  </div>
+    <div class="login">
+        <div class="center">
+            <h1>Add scheme</h1>
+            <form method="post" action="/auth/addscheme">
+              <input type="text" name="name" placeholder="Enter scheme name" required />
+              <input type="text" name="description" placeholder="Enter scheme description" required />
+              <input type="text" name="url" placeholder="Enter the url of scheme to be added" required/>
+              <div class="choose-dept">
+                <label for="department">Choose department:</label>
+                <select name="department">
+                {{#each departments}}
+                  <option value="{{this._id}}">{{this.name}}</option>
+                {{/each}}
+                </select>
+              </div>    
+              <input type="submit" name="submit" value="Submit" >
+            </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
