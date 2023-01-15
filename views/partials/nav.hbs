@@ -3,24 +3,25 @@
   <ul>
     <div class="nav-links">
       {{#if loggedIn}}
-        {{#if public}}
-          <li><a href="/public/problems">problems</a></li>
-        {{/if}}
-        {{#if employee}}
-          <li><a href="#">Problems</a></li>
-        {{/if}}
-        {{#if admin}}
-        <li><a href="/admin/department">Departments</a></li>
-          {{!-- <li><a href="/admin/adddepartment">Add Department</a></li> --}}
-          {{!-- <li><a href="/public/schemes">Schemes</a></li> --}}
-          <li><a href="/public/addproblem">Add Problem</a></li>
-        {{/if}}
-        <li><a href="/public/schemes">Schemes</a></li>
-        <li><a href="/auth/logout">Logout</a></li>
-      {{else}}
-        <li><a href="/public/schemes">Schemes</a></li>
-        <li><a href="/public/about">About</a></li>
-        <li><a href="/auth/login">Login</a></li>
+          {{#if public}}
+            <li><a href="/public/problem">Problem</a></li>
+          {{/if}}
+          {{#if employee}}  
+            <li><a href="#">Problems</a></li>
+          {{/if}}
+          {{#if admin}}
+          <li><a href="/admin/department">Departments</a></li>
+            {{!-- <li><a href="/admin/adddepartment">Add Department</a></li> --}}
+            {{!-- <li><a href="/public/schemes">Schemes</a></li> --}}
+            <li><a href="/public/problem">Problem</a></li>
+          {{/if}}
+          <li><a href="/public/schemes">Schemes</a></li>
+          <li><a href="/public/about">About</a></li>
+          <li><a href="/auth/logout">Logout</a></li>
+        {{else}}
+          <li><a href="/public/schemes">Schemes</a></li>
+          <li><a href="/public/about">About</a></li>
+          <li><a href="/auth/login">Login</a></li>
       {{/if}}
     </div>
   </ul>
