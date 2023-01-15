@@ -3,35 +3,14 @@ const Department = require("../models/Department");
 const verifyToken = require("../utils/verifyToken");
 const Scheme = require("../models/GovtScheme");
 
-router.get("/departments", verifyToken, async (req, res) => {
-  //get all departments
-  const departments = await Department.find()
-    .then((departments) => {
-      return departments;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  if (req.user.role !== "admin")
-    return res.send("You are not authorized to view this page");
-  console.log(departments);
-  res.send("ok");
-  // res.render("departments.hbs", {
-  //     loggedIn: true,
-  //     admin: req.user.role === "admin",
-  //     departments
-  // });
-});
-
 router.get("/department", verifyToken, async (req, res) => {
   const userType = req.user.role;
   const departments = await Department.find()
-    // .populate("department")
     .then((departments) => {
       departments.forEach((department) => {
         department.isAdmin = userType === "admin";
       });
-      return department;
+      return departments;
     })
     .catch((err) => {
       console.log(err);
@@ -42,9 +21,6 @@ router.get("/department", verifyToken, async (req, res) => {
     departments,
   });
 });
-
-
-
 
 router.get("/adddepartment", verifyToken, (req, res) => {
   const userType = req.user.role;
@@ -89,6 +65,24 @@ router.post("/adddepartment", verifyToken, (req, res) => {
     }
     res.send("Department added successfully");
   });
+});
+
+router.get("/deletedepartment/:id", verifyToken, (req, res) => {
+  try {
+    if (req.user.role !== "admin")
+      return res.send("You are not authorized to view this page");
+    const id = req.params.id;
+    Department.findByIdAndDelete(id)
+      .then((department) => {
+        console.log(department);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    res.redirect("/admin/department");
+  } catch (error) {
+    res.send("Something went wrong" + error);
+  }
 });
 
 router.get("/addscheme", verifyToken, async (req, res) => {
