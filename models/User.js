@@ -26,7 +26,7 @@ const userSchema = new mongoose.Schema({
         default: 'public',
         enum: ['admin', 'employee', 'public']
     },
-    dept:{
+    department:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Department'
     },
