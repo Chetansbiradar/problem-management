@@ -1,24 +1,5 @@
 const mongoose = require("mongoose");
 
-// dept{
-//     deptCode 
-//     name
-//     address:{
-//         street
-//         city 
-//         pincode
-//     }
-//     phoneNumber
-//     problems: [{ref problem}]
-// }
-
-// govtSchemes{
-//     name
-//     description 
-//     url
-//     deptment: {ref dept}
-// }
-
 const problemSchema = new mongoose.Schema({
     department: {
         type: mongoose.Schema.Types.ObjectId,
