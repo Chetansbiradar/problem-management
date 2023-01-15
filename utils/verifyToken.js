@@ -4,7 +4,12 @@ const User = require("../models/User");
 //verify token
 async function verifyToken(req, res, next) {
   let token = (req.headers.cookie)
-  if (!token) return res.status(401).render("index.hbs");
+  if (!token) {
+    if(req.route.path==="/schemes"){
+      req.user ={role:""}
+      return next();}
+    return res.status(401).render("index.hbs");
+  }
   token = token.split("=")[1];
   try {
     const verified = jsonwebtoken.verify(token, "someSecretKey");
