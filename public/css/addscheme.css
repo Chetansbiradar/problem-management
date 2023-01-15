@@ -1,0 +1,24 @@
+.add-scheme{
+    margin-top: 25px;
+    display: block;
+    margin-left: 80%;
+    border: 1px solid white;
+    padding: 9px;
+    border-radius: 25px;
+}
+.add-scheme-link{
+    text-decoration: none;
+}
+
+/* .delete-scheme{
+    margin-top: 25px;
+    display: block;
+    margin-left: 80%;
+    border: 1px solid white;
+    padding: 9px;
+    border-radius: 25px;
+} */
+
+.delete-link{
+    text-decoration: none;
+}
