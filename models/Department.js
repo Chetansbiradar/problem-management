@@ -82,6 +82,12 @@ const deptSchema = new mongoose.Schema({
       ref: "GovtScheme",
     },
   ],
+  employees: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 //eg of deptSchema
