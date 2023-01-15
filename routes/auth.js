@@ -28,12 +28,7 @@ router.post("/login", async (req, res) => {
     res.cookie("authToken", token, {
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000
-    }).render("index.hbs", {
-        loggedIn: true,
-        public: userType === "public",
-        employee: userType === "employee",
-        admin: userType === "admin"
-    });
+    }).redirect("/");
 });
 
 router.get("/register", (req, res) => {
