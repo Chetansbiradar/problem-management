@@ -46,6 +46,11 @@ nav {
   justify-content: space-between;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.3);
+  transition: 1s;
+}
+nav:hover{
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: 0.5s;
 }
 /* nav ul no decoration */
 nav ul li {
@@ -55,6 +60,7 @@ nav ul li {
   padding: 8px 12px;
   position: relative;
   margin: auto;
+  transition: 0.4s;
 }
 /* li hover */
 nav ul li:hover{
@@ -63,6 +69,8 @@ nav ul li:hover{
   border-radius: 10px;
   font-size: 17px;
   transition: 0.8s;
+  rotate: 1deg;
+  scale: 1.1;
 }
 nav ul li a {
   color: white;

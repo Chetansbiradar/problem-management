@@ -5,9 +5,16 @@
     border: 1px solid white;
     padding: 9px;
     border-radius: 25px;
+    transition: 0.4s;
 }
 .add-scheme-link{
     text-decoration: none;
+}
+
+.add-scheme:hover{
+    transition: 0.8s;
+    scale: 1.1;
+    box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
 }
 
 .delete-scheme{
@@ -19,6 +26,12 @@
     border: none;
     border-radius: 1rem;
     background-color: rgb(226, 224, 224);
+    transition: 0.4s;
+}
+
+.delete-scheme:hover{
+    transition: 0.8s;
+    scale: 1.1;
 }
 
 .delete-link{
