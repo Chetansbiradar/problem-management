@@ -7,7 +7,16 @@ const Scheme = require("../models/GovtScheme");
 
 router.get("/problem", verifyToken, async (req, res) => {
   let problems = req.user.problems;
-  problems = await Problem.find({ _id: { $in: problems } }).populate("department");
+  problems = await Problem.find({ _id: { $in: problems } }).populate("department").populate("submittedBy").then((problem) => {
+    problem.forEach((problem) => {
+      problem.public = req.user.role === "public";
+      problem.admin = req.user.role === "admin";
+    });
+    return problem;
+  }).catch((err) => {
+    console.log(err);
+    return res.send("Something went wrong");
+  });
   res.render("problem.hbs",{
     loggedIn: true,
     admin: req.user.role === "admin",
@@ -74,6 +83,22 @@ router.get("/addproblem", verifyToken, async (req, res) => {
     departments,
   });
 });
+
+router.get("/deleteproblem/:id",verifyToken,(req,res)=>{
+  Problem.findByIdAndDelete(req.params.id,(err,problem)=>{
+    if(err){
+      console.log(err);
+      return res.send("Something went wrong");
+    }
+    User.findByIdAndUpdate(req.user._id,{$pull:{problems:problem._id}},(err,user)=>{
+      if(err){
+        console.log(err);
+        return res.send("Something went wrong");
+      }
+      res.redirect("/public/problem");
+    })
+  })
+})
 
 router.get("/schemes", verifyToken, async (req, res) => {
   let userType;
