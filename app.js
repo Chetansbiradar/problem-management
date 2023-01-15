@@ -67,6 +67,7 @@ app.get("/",verifyToken,(req, res) => {
 
 app.use("/auth", require("./routes/auth"));
 app.use("/public", require("./routes/public"));
+app.use("/employee", require("./routes/employee"));
 app.use("/admin", require("./routes/admin"));
 
 
