@@ -58,6 +58,7 @@ app.get("/",verifyToken,(req, res) => {
   if (req.user) userType = req.user.role;
   res.render("index.hbs",{
     loggedIn: userType !== undefined,
+    user: req.user,
     public: userType === "public",
     employee: userType === "employee",
     admin: userType === "admin"
