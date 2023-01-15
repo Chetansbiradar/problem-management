@@ -23,6 +23,29 @@ router.get("/departments", verifyToken, async (req, res) => {
   // });
 });
 
+router.get("/department", verifyToken, async (req, res) => {
+  const userType = req.user.role;
+  const departments = await Department.find()
+    // .populate("department")
+    .then((departments) => {
+      departments.forEach((department) => {
+        department.isAdmin = userType === "admin";
+      });
+      return department;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  res.render("department.hbs", {
+    loggedIn: userType,
+    admin: userType === "admin",
+    departments,
+  });
+});
+
+
+
+
 router.get("/adddepartment", verifyToken, (req, res) => {
   const userType = req.user.role;
   if (userType !== "admin")
