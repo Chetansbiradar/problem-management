@@ -10,14 +10,16 @@
     text-decoration: none;
 }
 
-/* .delete-scheme{
-    margin-top: 25px;
-    display: block;
-    margin-left: 80%;
-    border: 1px solid white;
-    padding: 9px;
-    border-radius: 25px;
-} */
+.delete-scheme{
+    padding: 0.5rem 1rem;
+    color: red;
+    /* text weight */
+    font-weight: bold;
+    box-shadow: 0;
+    border: none;
+    border-radius: 1rem;
+    background-color: rgb(226, 224, 224);
+}
 
 .delete-link{
     text-decoration: none;
