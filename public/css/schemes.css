@@ -28,8 +28,8 @@ td{
 td:hover{
   background-color: #fffdfd;
   transition: 0.8s;
-  border: 1px solid rgb(2, 2, 2);
-  scale: 1.05;
+  /* border: 1px solid rgb(2, 2, 2); */
+  scale: 1.01;
 }
 /* -----------------------------------SCHEMES--------------------------------------------------- */
 

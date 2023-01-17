@@ -7,6 +7,7 @@
 body {
   min-height: 100vh;
   width: 100%;
+  background-image: linear-gradient(rgba(79, 121, 66, 0.4),rgba(79, 121, 66, 0.4)),url("/img/globalagriculture.jpg");
   background-color: rgb(205, 205, 205);
   /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab); */
   /* animation: gradient 15s ease infinite; */
@@ -65,7 +66,7 @@ nav ul li {
 /* li hover */
 nav ul li:hover{
   color: black;
-  background-color: #464646;
+  background-color: #c7750a;
   border-radius: 10px;
   font-size: 17px;
   transition: 0.8s;
