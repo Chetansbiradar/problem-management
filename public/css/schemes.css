@@ -4,32 +4,36 @@ table {
   width: 80%;
   margin: 2rem auto;
   border: 1px solid #ddd;
+  /* transparent blur */
+  background-color: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(6px);
 }
-th, td {
+th,
+td {
   text-align: center;
   word-break: keep-all;
   padding: 15px;
 }
-th{
+th {
   background-color: black;
   color: white;
+
 }
-tr{
+tr {
   border-bottom: 1px solid #ddd;
   transition: 0.4s;
 }
-tr:hover{
+tr:hover {
   background-color: #f1f1f1;
   transition: 0.8s;
 }
-td{
+td {
   transition: 0.4s;
 }
-td:hover{
+td:hover {
   background-color: #fffdfd;
   transition: 0.8s;
   /* border: 1px solid rgb(2, 2, 2); */
   scale: 1.01;
 }
 /* -----------------------------------SCHEMES--------------------------------------------------- */
-
