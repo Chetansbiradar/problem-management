@@ -3,34 +3,33 @@ table {
   border-spacing: 0;
   width: 80%;
   margin: 2rem auto;
-  background-color: rgb(255, 255, 255);
-  border: 1px solid rgb(0, 0, 0);
+  border: 1px solid #ddd;
 }
-th, td {
+th,
+td {
   text-align: center;
   word-break: keep-all;
   padding: 15px;
 }
-th{
+th {
   background-color: black;
   color: white;
+
 }
 tr{
-  /* border-bottom: 1px solid #ddd; */
   transition: 0.4s;
 }
 tr:hover{
   background-color: #969696;
   transition: 0.8s;
 }
-td{
+td {
   transition: 0.4s;
 }
-td:hover{
+td:hover {
   background-color: #fffdfd;
   transition: 0.8s;
   /* border: 1px solid rgb(2, 2, 2); */
   scale: 1.01;
 }
 /* -----------------------------------SCHEMES--------------------------------------------------- */
-
