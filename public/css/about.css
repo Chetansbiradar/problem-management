@@ -1,12 +1,25 @@
+body{
+    background-color: rgb(255, 255, 255);
+    background-image: none;
+}
+nav ul li a {
+    color: rgb(0, 0, 0);
+    border-bottom: 1.5px solid rgb(255, 4, 4);
+}
+nav ul li :hover{
+    border-bottom: none;
+}
+nav ul li a:hover{
+    border-bottom: none;
+}
 .about{
     width: 100%;
-    /* background-color: #ddd; */
 }
 .abt-container{
-    width: 80%;
+    width: 75%;
     display: block;
     margin: auto;
-    padding-top:100px ;
+    padding-top:80px ;
 }
 
 .content-section{
@@ -16,20 +29,23 @@
 
 .abt-image{
     float: right;
-    width: 40%;
+    width: 25%;
+    
 }
 .abt-image img{
     width: 100%;
     height: auto;
+    border: 1px solid black;
 }
 
 .content-section .abt-title{
     text-transform: uppercase;
     font-size: 22px;
+    border-bottom: 1px solid rgb(255, 4, 4);
 }
 .content-section .abt-content h3{
     margin-top: 20px;
-    color: #373535;
+    color: #3b3a3a;
     font-size: 20px;
 }
 
@@ -38,16 +54,19 @@
     /* font-family: ; */
     font-size: 18px;
     line-height: 1.5;
+    color:#4a4a4a;
 }
 .content-section .social{
     margin-top: 30px;
 }
 .content-section .social ion-icon{
-    color: #a52a2a;
+    color: rgb(255, 4, 4);
     font-size: 25px;
-    padding: 0px 20px 0px 0px;
+    padding: 3px;
+    margin-right: 40px;
 }
 .content-section .social ion-icon:hover{
-    color: #3d3c3c;
+    color: #ff0303;
     transition: 0.9s;
+    scale: 1.5;
 }
