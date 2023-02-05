@@ -31,7 +31,7 @@
               <input type="text" name="taluk" placeholder="Enter your taluk" required />
               <input type="text" name="city" placeholder="Enter your city" required />
               <input type="number" name="pincode" placeholder="Enter your pincode" required />
-              <input type="date" name="fromDate" placeholder="Enter date of problem started" id="Date"/>
+              <input type="text" name="fromDate" placeholder="Enter date of problem started" id="Date" min="2010-01-01" onfocus="this.type='date'" onblur="this.type='text'"/>
               <input type="submit" name="submit" value="Submit" id="submit-btn"/>                
             </form>
     </div>
