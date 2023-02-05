@@ -63,9 +63,20 @@ router.post("/adddepartment", verifyToken, (req, res) => {
   department.save((err, department) => {
     if (err) {
       console.log(err);
-      return res.send("Something went wrong");
+      // return res.send("Something went wrong");
+      return res.render("message.hbs",{
+        title:"Error",
+        message:"Something went wrong",
+        link:"/admin/adddepartment",
+      });
     }
-    res.send("Department added successfully");
+    // res.send("Department added successfully");
+    res.render("message.hbs",{
+      title:"Success",
+      message:"Department added successfully",
+      link:"/admin/department",
+    });
+  
   });
 });
 
@@ -145,7 +156,12 @@ router.post("/addscheme", verifyToken, (req, res) => {
   scheme.save((err, scheme) => {
     if (err) {
       console.log(err);
-      return res.send("Something went wrong");
+      // return res.send("Something went wrong");
+      return res.render("message.hbs",{
+        title: "Error",
+        message:"Something went wrong",
+        link:"/admin/addscheme",
+      });
     }
     Department.findByIdAndUpdate(
       department,
@@ -153,12 +169,22 @@ router.post("/addscheme", verifyToken, (req, res) => {
       (err, department) => {
         if (err) {
           console.log(err);
-          return res.send("Something went wrong");
+          // return res.send("Something went wrong");
+          return res.render("message.hbs",{
+            title: "Error",
+            message:"Something went wrong",
+            link:"/admin/addscheme",
+          });
         }
         console.log(department);
       }
     );
-    res.send("Scheme added successfully");
+    // res.send("Scheme added successfully");
+    res.render("message.hbs",{
+      title: "Success",
+      message:"Scheme added successfully",
+      link:"/public/schemes",
+    });
   });
 });
 
@@ -202,7 +228,12 @@ router.get("/addemployee", verifyToken, async (req, res) => {
 router.post("/addemployee", verifyToken, (req, res) => {
   const { name, email, phone, password, department } = req.body;
   if (!name || !email || !phone || !password || !department)
-    return res.send("Please fill all the fields");
+    // return res.send("Please fill all the fields");
+    return res.render("message.hbs",{
+      title: "Error",
+      message:"Please fill all the fields",
+      link:"/admin/addemployee",
+    });
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
   const employee = new User({
@@ -216,7 +247,12 @@ router.post("/addemployee", verifyToken, (req, res) => {
   employee.save((err, employee) => {
     if (err) {
       console.log(err);
-      return res.send("Something went wrong");
+      // return res.send("Something went wrong");
+      return res.render("message.hbs",{
+        title:"Error",
+        message:"Something went wrong",
+        link:"/admin/addemployee",
+      });
     }
     Department.findByIdAndUpdate(
       department,
@@ -224,19 +260,34 @@ router.post("/addemployee", verifyToken, (req, res) => {
       (err, department) => {
         if (err) {
           console.log(err);
-          return res.send("Something went wrong");
+          // return res.send("Something went wrong");
+          return res.render("message.hbs",{
+            title:"Error",
+            message:"Something went wrong",
+            link:"/admin/addemployee",
+          });
         }
         console.log(department);
       }
     );
-    res.send("Employee added successfully");
+    // res.send("Employee added successfully");
+    res.render("message.hbs",{
+      title:"Success",
+      message:"Employee added successfully",
+      link:"/admin/employee",
+    });
   });
 });
 
 router.get("/deleteemployee/:id", verifyToken, (req, res) => {
   try {
     if (req.user.role !== "admin")
-      return res.send("You are not authorized to view this page");
+      // return res.send("You are not authorized to view this page");
+      return res.render("message.hbs",{
+        title:"restricted",
+        message:"You are not authorized to view this page",
+        link:"/admin/employee",
+      });
 
     const id = req.params.id;
     
@@ -257,7 +308,12 @@ router.get("/deleteemployee/:id", verifyToken, (req, res) => {
       });
     res.redirect("/admin/employee");
   } catch (error) {
-    res.send("Something went wrong" + error);
+    // res.send("Something went wrong" + error);
+    res.render("message.hbs",{
+      title:"Error",
+      message:"Something went wrong",
+      link:"/admin/employee",
+    });
   }
 });
 

@@ -32,7 +32,12 @@ router.post("/addproblem", verifyToken, (req, res) => {
     req.body;
 
   if (!description || !department || !street || !taluk || !city || !pincode)
-    return res.send("Please fill all the fields");
+    // return res.send("Please fill all the fields");
+    return res.render("message.hbs",{
+      title:"Error",
+      message:"Please fill all the fields",
+      link:"/public/addproblem"
+    });
 
   const problem = new Problem({
     department,
@@ -49,7 +54,12 @@ router.post("/addproblem", verifyToken, (req, res) => {
   problem.save((err, problem) => {
     if (err) {
       console.log(err);
-      return res.send("Something went wrong");
+      // return res.send("Something went wrong");
+      return res.render("message.hbs",{
+      title:"Error",
+      message:"Something went wrong",
+      link:"/public/addproblem"
+      });
     }
     User.findByIdAndUpdate(
       req.user._id,
@@ -57,11 +67,21 @@ router.post("/addproblem", verifyToken, (req, res) => {
       (err, user) => {
         if (err) {
           console.log(err);
-          return res.send("Something went wrong");
+          // return res.send("Something went wrong");
+          return res.render("message.hbs",{
+            title: "Error",
+            message:"Something went wrong",
+            link:"/public/addproblem"
+          });
         }
       }
     );
-    res.send("Problem added successfully");
+    // res.send("Problem added successfully");
+    res.render("message.hbs",{
+      title:"Success",
+      message:"Problem added successfully",
+      link:"/public/problem"
+    });
   });
 });
 
@@ -88,12 +108,22 @@ router.get("/deleteproblem/:id",verifyToken,(req,res)=>{
   Problem.findByIdAndDelete(req.params.id,(err,problem)=>{
     if(err){
       console.log(err);
-      return res.send("Something went wrong");
+      // return res.send("Something went wrong");
+      return res.render("message.hbs",{
+        title:"Error",
+        message:"Something went wrong",
+        link:"/public/problem"
+      });
     }
     User.findByIdAndUpdate(req.user._id,{$pull:{problems:problem._id}},(err,user)=>{
       if(err){
         console.log(err);
-        return res.send("Something went wrong");
+        // return res.send("Something went wrong");
+        return res.render("message.hbs",{
+          title:"Error",
+          message:"Something went wrong",
+          link:"/public/problem"
+        });
       }
       res.redirect("/public/problem");
     })
