@@ -31,10 +31,24 @@
               <input type="text" name="taluk" placeholder="Enter your taluk" required />
               <input type="text" name="city" placeholder="Enter your city" required />
               <input type="number" name="pincode" placeholder="Enter your pincode" required />
-              <input type="date" name="fromDate" placeholder="Enter date of problem started" />
+              <input type="date" name="fromDate" placeholder="Enter date of problem started" id="Date"/>
               <input type="submit" name="submit" value="Submit" id="submit-btn"/>                
             </form>
     </div>
   </div>
+  <script>
+    var todaydate=new Date();
+    var month=todaydate.getMonth();
+    var year=todaydate.getUTCFullYear();
+    var tdate=todaydate.getDate();
+    if(month<10){
+      month="0"+month;
+    }
+    if(tdate<10){
+      tdate="0"+tdate;
+    }
+    var maxDate=year+"-"+month+"-"+tdate;
+    document.getElementById("Date").setAttribute("max",maxDate);
+  </script>
 </body>
 </html>
