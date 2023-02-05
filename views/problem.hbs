@@ -7,6 +7,14 @@
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/schemes.css">
   <link rel="stylesheet" href="/css/addscheme.css">
+  <style>
+    .noProblem{
+      color: rgb(255, 255, 255);
+      margin-left: 60px;
+      margin-top: 30px;
+      
+    }
+  </style>
   <title>Schemes</title>
 </head>
 <body>
@@ -74,7 +82,7 @@
       {{/each}}
     </table>
     {{else}}
-    <h1>No problems found</h1>
+    <h1 class="noProblem">No problems found</h1>
     {{/if}}
     {{/if}}
   </div>
